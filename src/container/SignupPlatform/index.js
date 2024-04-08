@@ -16,8 +16,8 @@ export default function SignupPlatform({ navigation }) {
       <View style={styles.innerContainer}>
         <Image source={logo} resizeMode="contain" width={179} height={70} />
       </View>
-      <View>
-        <ButtonComponent
+      <View style={{height: '25%'}}>
+        {/* <ButtonComponent
           title={'Continue with Google'}
           style={{ width: '100%', backgroundColor: '#EA4335', marginBottom: 20 }}
         />
@@ -28,9 +28,9 @@ export default function SignupPlatform({ navigation }) {
         <ButtonComponent
           title={'Continue with Facebook'}
           style={{ width: '100%', backgroundColor: '#1877F2', marginBottom: 20 }}
-        />
+        /> */}
       </View>
-      <View style={{ ...styles.override, marginBottom: 10 }}>
+      {/* <View style={{ ...styles.override, marginBottom: 10 }}>
         <Image source={borderLine} resizeMode="contain" />
         <TextComponent
           text={'or'}
@@ -40,7 +40,7 @@ export default function SignupPlatform({ navigation }) {
         />
 
         <Image source={borderLine} resizeMode="contain" />
-      </View>
+      </View> */}
       <ButtonComponent
         title={'Sign up with email'}
         style={{ width: '100%', marginTop: 40 }}

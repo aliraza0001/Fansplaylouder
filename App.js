@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ImageBackground
 } from 'react-native';
-import messaging from "@react-native-firebase/messaging";
+// import messaging from "@react-native-firebase/messaging";
 
 import StackNavigatior from './src/navigation/navigation';
 const logoScreen = require('./src/assets/images/splashimage.png');
@@ -28,28 +28,28 @@ const App = () => {
 
 
   requestUserPermission = async () => {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+    // const authStatus = await messaging().requestPermission();
+    // const enabled =
+    //   authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    //   authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-      console.log("auth status",authStatus)
-      console.log("enabled",enabled)
-    if (enabled) {
-      getFcmToken();
-      console.log("Authorization status:", authStatus);
-    }
+    //   console.log("auth status",authStatus)
+    //   console.log("enabled",enabled)
+    // if (enabled) {
+    //   getFcmToken();
+    //   console.log("Authorization status:", authStatus);
+    // }
   };
 
   getFcmToken = async () => {
-    const fcmToken = await messaging().getToken();
-    console.log("FCM Token ==>", fcmToken);
-    if (fcmToken) {
-      dispatch(updateStates({ fcmToken }));
-      console.log("Your Firebase Token is:", fcmToken);
-    } else {
-      console.log("Failed", "No token received");
-    }
+    // const fcmToken = await messaging().getToken();
+    // console.log("FCM Token ==>", fcmToken);
+    // if (fcmToken) {
+    //   dispatch(updateStates({ fcmToken }));
+    //   console.log("Your Firebase Token is:", fcmToken);
+    // } else {
+    //   console.log("Failed", "No token received");
+    // }
   };
 
   let Splash_Screen = (

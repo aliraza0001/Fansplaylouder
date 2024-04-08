@@ -37,7 +37,7 @@ export default function SocialLogin({
           onPress={onPress}
         />
       </View>
-      <View style={{...styles.override, marginBottom: 10}}>
+      {/* <View style={{...styles.override, marginBottom: 10}}>
         <Image source={borderLine} resizeMode="contain" />
         <TextComponent
           text={orText}
@@ -47,9 +47,9 @@ export default function SocialLogin({
         />
 
         <Image source={borderLine} resizeMode="contain" />
-      </View>
+      </View> */}
 
-      <View style={styles.override}>
+      {/* <View style={styles.override}>
         <TouchableOpacity onPress={onFbPress}>
           <Image source={fbImg} resizeMode="contain" />
         </TouchableOpacity>
@@ -61,7 +61,7 @@ export default function SocialLogin({
         <TouchableOpacity onPress={onApPress}>
           <Image source={gmImg} resizeMode="contain" />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 }
