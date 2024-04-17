@@ -1,4 +1,4 @@
-import { View, ActivityIndicator } from 'react-native'
+import { View, ActivityIndicator, StyleSheet } from 'react-native'
 
 export const Loader = () => {
     return (
@@ -35,3 +35,86 @@ export const removeItem = async (key) => {
     await AsyncStorage.removeItem(key);
   } catch (e) {}
 };
+
+export const PopUpToast = () => {
+  const dispatch = useDispatch();
+  const {toast} = useSelector(state => state.AppReducer);
+
+  const translateAnim = useRef(new Animated.Value(150)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const duration = 300;
+  useEffect(() => show(), []);
+
+  const show = () => {
+    Animated.parallel([
+      Animated.timing(translateAnim, {
+        toValue: 0,
+        duration: duration,
+        useNativeDriver: true,
+      }).start(),
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: duration,
+        useNativeDriver: true,
+      }),
+    ]).start(({finished}) => {
+      setTimeout(() => hide(), 2000);
+    });
+  };
+
+  const hide = () => {
+    Animated.parallel([
+      Animated.timing(translateAnim, {
+        toValue: 150,
+        duration: duration,
+        useNativeDriver: true,
+      }).start(),
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: duration,
+        useNativeDriver: true,
+      }),
+    ]).start(({finished}) => {
+      dispatch({
+        type: 'SHOW_TOAST',
+        toast: {
+          show: false,
+          title: '',
+        },
+      });
+    });
+  };
+
+  return (
+    <Animated.View
+      style={{
+        ...styles.popupCard,
+        alignItems: 'center',
+        bottom: 45,
+        opacity: fadeAnim,
+        transform: [{translateY: translateAnim}],
+        backgroundColor: COLORS.primary,
+        borderColor: COLORS.primary,
+      }}>
+      <Typography size={FONTSIZE.S} color={'#fff'} textType={'light'}>
+        {toast.title}
+      </Typography>
+    </Animated.View>
+  );
+};
+
+const styles = StyleSheet.create({
+  popupCard: {
+    width: '90%',
+    maxWidth: 400,
+    backgroundColor: '#fff',
+    position: 'absolute',
+    zIndex: 99,
+    alignSelf: 'center',
+    borderRadius: 10,
+    padding: 15,
+    borderWidth: 2,
+    // borderColor: COLORS.secondary
+    borderColor: "black"
+  }
+})

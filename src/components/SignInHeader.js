@@ -10,7 +10,7 @@ const bgImg = require('../assets/images/signupbg.png');
 export default function SignInHeader(props) {
   return (
     <View style={styles.container}>
-       <TextComponent onPress={() => props.navigation ? props.navigation.goBack() : props.navigation.navigate('WelcomeScreenOne') } text={'back'} style={styles.textStyles}/>
+       <TextComponent onPress={() => props.navigation ? props.navigation.goBack() : props.navigation.navigate('WelcomeScreenOne') } text={'back'} style={[styles.textStyles, { marginTop: Platform.OS == 'ios' ? 20 : 10 }]} />
       <Text style={styles.headerText}>{props.headerText}</Text>
     </View>
   )

@@ -41,6 +41,11 @@ export default function SignupPlatform({ navigation }) {
 
         <Image source={borderLine} resizeMode="contain" />
       </View> */}
+            <ButtonComponent
+        title={'Login with email'}
+        style={{ width: '100%', marginTop: 40 }}
+        onPress={() => { navigation.navigate('Login') }}
+      />
       <ButtonComponent
         title={'Sign up with email'}
         style={{ width: '100%', marginTop: 40 }}
