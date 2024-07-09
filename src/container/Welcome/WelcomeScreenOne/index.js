@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, ImageBackground, Dimensions } from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, ImageBackground, Dimensions, Alert } from 'react-native';
 import React from 'react';
 import { styles } from './style';
 // import Teams from '../../../components/Teams';
@@ -12,9 +12,49 @@ import { styles } from './style';
 // } from '../../../assets/images';
 import TextComponent from '../../../components/TextComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/AntDesign'
+import { colors } from '../../../theme/Color';
 const logo = require('../../../assets/images/logo.png');
 
 export default function WelcomeScreenOne({ navigation }) {
+
+  const handleDeleteAccount = () => {
+
+    const onDeleteAccount = () => {
+      const formdata = new FormData();
+      
+      const requestOptions = {
+        method: "DELETE ",
+        body: formdata,
+        redirect: "follow"
+      };
+      
+      fetch("http://vdz.wic.temporary.site/api/user/delete", requestOptions)
+        .then((response) => response.json())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+    }
+
+    Alert.alert(
+      'Delete Account',
+      'Are you sure you want to delete your account?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+          onPress: () => null
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => onDeleteAccount()
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
+
   return (
     <SafeAreaView style={{
       flex: 1,
@@ -30,12 +70,16 @@ export default function WelcomeScreenOne({ navigation }) {
       >
         <View style={styles.mainContainer}>
 
-          <View style={styles.container}>
+          <View style={[styles.container, { flexDirection: "row", alignItems: "center", justifyContent: "center" }]}>
+            {/* <TouchableOpacity onPress={handleDeleteAccount}>
+              <Icon name={'deleteuser'} size={22} color={colors.black} style={{ marginLeft: 15 }} />
+            </TouchableOpacity> */}
             <Image
               source={logo}
               style={styles.logoStyle}
               resizeMode="contain"
             />
+            {/* <View style={{ width: 20, marginRight: 15 }} /> */}
           </View>
           <ScrollView
             bounces={false}
@@ -149,7 +193,7 @@ export default function WelcomeScreenOne({ navigation }) {
               <TextComponent text='Hockey' style={styles.textStyle} />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate("ShopView")}
+            {/* <TouchableOpacity onPress={() => navigation.navigate("ShopView")}
               style={{
                 margin: 15,
                 alignItems: 'center'
@@ -164,7 +208,7 @@ export default function WelcomeScreenOne({ navigation }) {
                 resizeMode='cover'
               />
               <TextComponent text={'Shop Online'} style={styles.textStyle} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TouchableOpacity onPress={() => navigation.navigate("NewsFeed")}
               style={{

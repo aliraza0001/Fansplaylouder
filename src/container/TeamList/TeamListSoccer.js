@@ -2,6 +2,7 @@ import {
   View,
   Text,
   FlatList,
+  SafeAreaView,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
@@ -12,7 +13,7 @@ import { colors } from "../../theme/Color";
 import TeamName from "../../components/TeamName";
 import { Loader } from "../../utils";
 
-export default function TeamList({ route, navigation }) {
+export default function TeamListSoccer({ route, navigation }) {
   const [selectedId, setSelectedId] = useState();
 
   const [data, setData] = useState([]);
@@ -30,43 +31,25 @@ export default function TeamList({ route, navigation }) {
       "X-RapidAPI-Key",
       "fdf701fe2bmsh8c9f7797990ad86p1ddb3ajsne2f4d01935a5"
     );
-    if (paramData == "nba") {
-      myHeaders.append("X-RapidAPI-Host", "nba-listing1.p.rapidapi.com");
-    }
-    if (paramData == "mlb") {
-      myHeaders.append(
-        "X-RapidAPI-Host",
-        "mlb-sport-live-data-api.p.rapidapi.com"
-      );
-    }
-    if (paramData == "nhl") {
-      myHeaders.append(
-        "X-RapidAPI-Host",
-        "nhl-sport-live-data-api.p.rapidapi.com"
-      );
-    }
     if (paramData == "fifa") {
       myHeaders.append(
         "X-RapidAPI-Host",
         "fifa-football-player-team-stats-records-matches-api-data.p.rapidapi.com"
       );
     }
-    if (paramData == "nfl") {
-    }
     var requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
     };
-    console.log("baseUrl", baseUrl);
     fetch(
       `https://${baseUrl}.p.rapidapi.com/${paramData}-team-listing/v1/data`,
       requestOptions
     )
       .then((response) => response.json())
       .then((result) => {
+        setData(result);
         console.log("result", result);
-        setData(result.map((item) => item.team));
         setLoader(false);
       })
       .catch((error) => {
@@ -78,17 +61,20 @@ export default function TeamList({ route, navigation }) {
   const renderItem = ({ item }) => {
     // const backgroundColor = item.id === selectedId ? colors.primary : colors.placeholderColor;
     // const color = item.id === selectedId ? colors.black : colors.secondary;
+
+    console.log("item", item);
     return (
       <>
         <TeamName
           item={item}
-          teamLogo={item.logos[0].href}
-          teamTitle={item.name}
+          teamLogo={`https://api.fifa.com/api/v3/picture/flags-sq-4/${item.IdAssociation}`}
+          teamTitle={item.ShortClubName}
           onPress={() =>
             navigation.navigate("TeamSingle", {
               data: paramData,
               url: baseUrl,
-              id: item.id,
+              id: item.IdTeam,
+              item: item,
             })
           }
         />
@@ -122,7 +108,7 @@ export default function TeamList({ route, navigation }) {
             <FlatList
               data={data}
               renderItem={renderItem}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.IdTeam}
               extraData={selectedId}
               contentContainerStyle={styles.list}
             />
