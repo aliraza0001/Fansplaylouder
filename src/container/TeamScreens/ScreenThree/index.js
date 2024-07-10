@@ -26,7 +26,7 @@ export default function ScreenFour({ navigation }) {
 
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.navigate("TeamList", {
+              onPress={() => navigation.navigate("CommingSoon", {
                 data: 'mlb',
                 url: 'mlb-sport-live-data-api'
               })}

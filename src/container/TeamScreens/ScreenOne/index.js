@@ -23,7 +23,7 @@ export default function ScreenOne({ navigation }) {
 
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.navigate("TeamListSoccer", {
+              onPress={() => navigation.navigate("CommingSoon", {
                 data: 'fifa',
                 url: 'fifa-football-player-team-stats-records-matches-api-data'
               })}

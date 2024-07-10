@@ -44,6 +44,8 @@ export default function StackNavigatior() {
         <Stack.Screen name="ShopSingle" component={Screens.ShopSingle} />
 
         <Stack.Screen name="NewsFeed" component={Screens.NewsFeed} />
+        <Stack.Screen name="CommingSoon" component={Screens.CommingSoon} />
+
         <Stack.Screen
           name="SingleNewsFeed"
           component={Screens.SingleNewsFeed}

@@ -63,7 +63,9 @@ const NewsFeed = (props) => {
                 key={item.id}
                 activeOpacity={0.7}
                 style={styles.container}
-                // onPress={() => props.navigation.navigate("SingleNewsFeed", { id: item.id })}
+                onPress={() =>
+                  props.navigation.navigate("SingleNewsFeed", { blog: item })
+                }
               >
                 <View style={styles.card}>
                   <View
